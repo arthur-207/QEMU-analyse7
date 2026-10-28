@@ -1,0 +1,2 @@
+kvm_run_exit
+kvm_set_user_memory

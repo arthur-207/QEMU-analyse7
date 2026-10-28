@@ -1,0 +1,553 @@
+window.T1_EVIDENCE = {
+  "time": "2026-10-28T15:28:45.644745+00:00",
+  "kernel": "6.18.54.1-microsoft-standard-WSL2",
+  "version": "QEMU emulator version 6.2.0",
+  "command": [
+    "strace",
+    "-f",
+    "-tt",
+    "-yy",
+    "-s",
+    "256",
+    "-e",
+    "trace=openat,ioctl,mmap",
+    "-o",
+    "/mnt/e/code work/wdwd-1/t1-visual/evidence/syscalls.log",
+    "/opt/qemu-6.2.0/bin/qemu-system-x86_64",
+    "-machine",
+    "pc,accel=kvm",
+    "-cpu",
+    "host",
+    "-smp",
+    "1",
+    "-m",
+    "16",
+    "-display",
+    "none",
+    "-serial",
+    "none",
+    "-monitor",
+    "none",
+    "-nic",
+    "none",
+    "-no-reboot",
+    "-drive",
+    "file=/mnt/e/code work/wdwd-1/t1-visual/evidence/boot.bin,format=raw,if=floppy,readonly=on",
+    "-boot",
+    "a",
+    "-debugcon",
+    "file:/mnt/e/code work/wdwd-1/t1-visual/evidence/guest-output.txt",
+    "-device",
+    "isa-debug-exit,iobase=0xf4,iosize=0x04",
+    "-trace",
+    "events=/mnt/e/code work/wdwd-1/t1-visual/evidence/events.txt,file=/mnt/e/code work/wdwd-1/t1-visual/evidence/qemu-trace.log"
+  ],
+  "returncode": 33,
+  "passed": true,
+  "guest_output": "KVM!",
+  "counts": {
+    "KVM_GET_API_VERSION": 1,
+    "KVM_CHECK_EXTENSION": 59,
+    "KVM_CREATE_VM": 1,
+    "KVM_ENABLE_CAP": 2,
+    "KVM_GET_MSR_INDEX_LIST": 2,
+    "KVM_GET_MSR_FEATURE_INDEX_LIST": 2,
+    "KVM_SET_IDENTITY_MAP_ADDR": 1,
+    "KVM_SET_TSS_ADDR": 1,
+    "KVM_CREATE_IRQCHIP": 1,
+    "KVM_IOEVENTFD": 14,
+    "KVM_X86_GET_MCE_CAP_SUPPORTED": 2,
+    "KVM_GET_SUPPORTED_CPUID": 7,
+    "KVM_GET_MSRS": 9,
+    "KVM_CREATE_VCPU": 1,
+    "KVM_GET_VCPU_MMAP_SIZE": 1,
+    "KVM_GET_TSC_KHZ": 2,
+    "KVM_X86_SETUP_MCE": 1,
+    "KVM_SET_CPUID2": 1,
+    "KVM_SET_MSRS": 10,
+    "KVM_GET_CLOCK": 1,
+    "KVM_SET_USER_MEMORY_REGION": 78,
+    "KVM_SET_GSI_ROUTING": 1,
+    "KVM_REGISTER_COALESCED_MMIO": 6,
+    "KVM_UNREGISTER_COALESCED_MMIO": 2,
+    "KVM_CREATE_PIT2": 1,
+    "KVM_SET_SREGS": 4,
+    "KVM_SET_NESTED_STATE": 2,
+    "KVM_SET_TSC_KHZ": 1,
+    "KVM_SET_REGS": 4,
+    "KVM_SET_XSAVE": 4,
+    "KVM_SET_XCRS": 4,
+    "KVM_SET_VCPU_EVENTS": 4,
+    "KVM_SET_MP_STATE": 2,
+    "KVM_SET_DEBUGREGS": 4,
+    "KVM_GET_VCPU_EVENTS": 3,
+    "KVM_GET_MP_STATE": 3,
+    "KVM_GET_REGS": 3,
+    "KVM_GET_XSAVE": 3,
+    "KVM_GET_XCRS": 3,
+    "KVM_GET_SREGS": 3,
+    "KVM_GET_LAPIC": 3,
+    "KVM_GET_DEBUGREGS": 3,
+    "KVM_GET_NESTED_STATE": 3,
+    "KVM_IRQ_LINE_STATUS": 386,
+    "KVM_GET_PIT2": 1,
+    "KVM_SET_PIT2": 3,
+    "KVM_SET_IRQCHIP": 3,
+    "KVM_TPR_ACCESS_REPORTING": 2,
+    "KVM_SET_VAPIC_ADDR": 1,
+    "KVM_SET_LAPIC": 1,
+    "KVM_SET_CLOCK": 1,
+    "KVM_KVMCLOCK_CTRL": 1,
+    "KVM_RUN": 4001,
+    "KVM_SMI": 3
+  },
+  "sources": [
+    {
+      "file": "accel/kvm/kvm-all.c",
+      "sha256": "69371e6d563304a4fe02c90004a99cc61dd31633780f8b28e73e6051863635ba",
+      "hits": [
+        {
+          "line": 367,
+          "text": "ret = kvm_vm_ioctl(s, KVM_SET_USER_MEMORY_REGION, &mem);"
+        },
+        {
+          "line": 373,
+          "text": "ret = kvm_vm_ioctl(s, KVM_SET_USER_MEMORY_REGION, &mem);"
+        },
+        {
+          "line": 379,
+          "text": "error_report(\"%s: KVM_SET_USER_MEMORY_REGION failed, slot=%d,\""
+        },
+        {
+          "line": 401,
+          "text": "mmap_size = kvm_ioctl(s, KVM_GET_VCPU_MMAP_SIZE, 0);"
+        },
+        {
+          "line": 404,
+          "text": "DPRINTF(\"KVM_GET_VCPU_MMAP_SIZE failed\\n\");"
+        },
+        {
+          "line": 451,
+          "text": "return kvm_vm_ioctl(s, KVM_CREATE_VCPU, (void *)vcpu_id);"
+        },
+        {
+          "line": 454,
+          "text": "int kvm_init_vcpu(CPUState *cpu, Error **errp)"
+        },
+        {
+          "line": 460,
+          "text": "trace_kvm_init_vcpu(cpu->cpu_index, kvm_arch_vcpu_id(cpu));"
+        },
+        {
+          "line": 464,
+          "text": "error_setg_errno(errp, -ret, \"kvm_init_vcpu: kvm_get_vcpu failed (%lu)\","
+        },
+        {
+          "line": 474,
+          "text": "mmap_size = kvm_ioctl(s, KVM_GET_VCPU_MMAP_SIZE, 0);"
+        },
+        {
+          "line": 478,
+          "text": "\"kvm_init_vcpu: KVM_GET_VCPU_MMAP_SIZE failed\");"
+        },
+        {
+          "line": 487,
+          "text": "\"kvm_init_vcpu: mmap'ing vcpu state failed (%lu)\","
+        },
+        {
+          "line": 513,
+          "text": "\"kvm_init_vcpu: kvm_arch_init_vcpu failed (%lu)\","
+        },
+        {
+          "line": 1143,
+          "text": "ret = kvm_ioctl(s, KVM_CHECK_EXTENSION, extension);"
+        },
+        {
+          "line": 1155,
+          "text": "ret = kvm_vm_ioctl(s, KVM_CHECK_EXTENSION, extension);"
+        },
+        {
+          "line": 1389,
+          "text": "* again before we do the final KVM_SET_USER_MEMORY_REGION to"
+        },
+        {
+          "line": 2352,
+          "text": "ret = kvm_ioctl(s, KVM_GET_API_VERSION, 0);"
+        },
+        {
+          "line": 2391,
+          "text": "ret = kvm_ioctl(s, KVM_CREATE_VM, type);"
+        },
+        {
+          "line": 2395,
+          "text": "fprintf(stderr, \"ioctl(KVM_CREATE_VM) failed: %d %s\\n\", -ret,"
+        },
+        {
+          "line": 2644,
+          "text": "direction == KVM_EXIT_IO_OUT);"
+        },
+        {
+          "line": 2715,
+          "text": "kvm_arch_get_registers(cpu);"
+        },
+        {
+          "line": 2729,
+          "text": "kvm_arch_put_registers(cpu, KVM_PUT_RESET_STATE);"
+        },
+        {
+          "line": 2740,
+          "text": "kvm_arch_put_registers(cpu, KVM_PUT_FULL_STATE);"
+        },
+        {
+          "line": 2790,
+          "text": "* write in kvm_cpu_exec."
+        },
+        {
+          "line": 2814,
+          "text": "int kvm_cpu_exec(CPUState *cpu)"
+        },
+        {
+          "line": 2819,
+          "text": "DPRINTF(\"kvm_cpu_exec()\\n\");"
+        },
+        {
+          "line": 2833,
+          "text": "kvm_arch_put_registers(cpu, KVM_PUT_RUNTIME_STATE);"
+        },
+        {
+          "line": 2848,
+          "text": "/* Read cpu->exit_request before KVM_RUN reads run->immediate_exit."
+        },
+        {
+          "line": 2853,
+          "text": "run_ret = kvm_vcpu_ioctl(cpu, KVM_RUN, 0);"
+        },
+        {
+          "line": 2890,
+          "text": "case KVM_EXIT_IO:"
+        },
+        {
+          "line": 2900,
+          "text": "case KVM_EXIT_MMIO:"
+        },
+        {
+          "line": 3445,
+          "text": "if (ioctl(vmfd, KVM_CHECK_EXTENSION, KVM_CAP_DEVICE_CTRL) <= 0) {"
+        }
+      ]
+    },
+    {
+      "file": "accel/kvm/kvm-accel-ops.c",
+      "sha256": "1191bf09b896f81925288a6a67d583f58ef96150300d827d7f0df443404f35e0",
+      "hits": [
+        {
+          "line": 40,
+          "text": "r = kvm_init_vcpu(cpu, &error_fatal);"
+        },
+        {
+          "line": 49,
+          "text": "r = kvm_cpu_exec(cpu);"
+        }
+      ]
+    },
+    {
+      "file": "target/i386/kvm/kvm.c",
+      "sha256": "67c1ef4ec4cc2c7916a7adfceeaff98c4cd50216ff6ae365a09cbc152a7115fb",
+      "hits": [
+        {
+          "line": 2542,
+          "text": "ret = kvm_vcpu_ioctl(CPU(cpu), KVM_SET_REGS, &regs);"
+        },
+        {
+          "line": 2650,
+          "text": "return kvm_vcpu_ioctl(CPU(cpu), KVM_SET_SREGS, &sregs);"
+        },
+        {
+          "line": 4168,
+          "text": "int kvm_arch_put_registers(CPUState *cpu, int level)"
+        },
+        {
+          "line": 4250,
+          "text": "int kvm_arch_get_registers(CPUState *cs)"
+        },
+        {
+          "line": 4411,
+          "text": "if (run->flags & KVM_RUN_X86_SMM) {"
+        },
+        {
+          "line": 4421,
+          "text": "if (run->flags & KVM_RUN_X86_BUS_LOCK) {"
+        },
+        {
+          "line": 4807,
+          "text": "case KVM_EXIT_IOAPIC_EOI:"
+        }
+      ]
+    },
+    {
+      "file": "linux-headers/linux/kvm.h",
+      "sha256": "954d7779bae4f6fd61ed07ebf276847f53ba418f009980ac19c785b3470c3824",
+      "hits": [
+        {
+          "line": 97,
+          "text": "/* for KVM_SET_USER_MEMORY_REGION */"
+        },
+        {
+          "line": 239,
+          "text": "#define KVM_EXIT_IO               2"
+        },
+        {
+          "line": 243,
+          "text": "#define KVM_EXIT_MMIO             6"
+        },
+        {
+          "line": 263,
+          "text": "#define KVM_EXIT_IOAPIC_EOI       26"
+        },
+        {
+          "line": 286,
+          "text": "/* for KVM_RUN, returned by mmap(vcpu_fd, offset=0) */"
+        },
+        {
+          "line": 323,
+          "text": "/* KVM_EXIT_IO */"
+        },
+        {
+          "line": 325,
+          "text": "#define KVM_EXIT_IO_IN  0"
+        },
+        {
+          "line": 326,
+          "text": "#define KVM_EXIT_IO_OUT 1"
+        },
+        {
+          "line": 337,
+          "text": "/* KVM_EXIT_MMIO */"
+        },
+        {
+          "line": 448,
+          "text": "/* KVM_EXIT_IOAPIC_EOI */"
+        },
+        {
+          "line": 843,
+          "text": "/* machine type bits, to be used as argument to KVM_CREATE_VM */"
+        },
+        {
+          "line": 869,
+          "text": "#define KVM_GET_API_VERSION       _IO(KVMIO,   0x00)"
+        },
+        {
+          "line": 870,
+          "text": "#define KVM_CREATE_VM             _IO(KVMIO,   0x01) /* returns a VM fd */"
+        },
+        {
+          "line": 878,
+          "text": "#define KVM_CHECK_EXTENSION       _IO(KVMIO,   0x03)"
+        },
+        {
+          "line": 882,
+          "text": "#define KVM_GET_VCPU_MMAP_SIZE    _IO(KVMIO,   0x04) /* in bytes */"
+        },
+        {
+          "line": 910,
+          "text": "/* Bug in KVM_SET_USER_MEMORY_REGION fixed: */"
+        },
+        {
+          "line": 922,
+          "text": "/* Another bug in KVM_SET_USER_MEMORY_REGION fixed: */"
+        },
+        {
+          "line": 1224,
+          "text": "/* Do not use 1, KVM_CHECK_EXTENSION returned it before we had flags.  */"
+        },
+        {
+          "line": 1362,
+          "text": "* KVM_CREATE_VCPU receives as a parameter the vcpu slot, and returns"
+        },
+        {
+          "line": 1365,
+          "text": "#define KVM_CREATE_VCPU           _IO(KVMIO,   0x41)"
+        },
+        {
+          "line": 1371,
+          "text": "#define KVM_SET_USER_MEMORY_REGION _IOW(KVMIO, 0x46, \\"
+        },
+        {
+          "line": 1473,
+          "text": "#define KVM_RUN                   _IO(KVMIO,   0x80)"
+        },
+        {
+          "line": 1475,
+          "text": "#define KVM_SET_REGS              _IOW(KVMIO,  0x82, struct kvm_regs)"
+        },
+        {
+          "line": 1477,
+          "text": "#define KVM_SET_SREGS             _IOW(KVMIO,  0x84, struct kvm_sregs)"
+        },
+        {
+          "line": 1655,
+          "text": "#define KVM_SET_SREGS2             _IOW(KVMIO,  0xcd, struct kvm_sregs2)"
+        }
+      ]
+    }
+  ],
+  "exits": {
+    "2": 3624,
+    "6": 376
+  },
+  "trace_tail": [
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2",
+    "kvm_run_exit cpu_index 0, reason 2"
+  ],
+  "running_qemu": "34 /opt/qemu-6.2.0/bin/qemu-system-x86_64 -name t1-jammy -machine q35,accel=kvm -cpu host -smp 4 -m 4096 -drive file=/root/t1-lab/images/jammy-work.qcow2,format=qcow2,if=virtio -drive file=/root/t1-lab/images/seed.iso,format=raw,if=virtio,readonly=on -netdev user,id=n0,hostfwd=tcp:127.0.0.1:2222-:22 -device virtio-net-pci,netdev=n0 -display none -monitor none -serial file:/root/t1-lab/results/guest-serial.log -pidfile /root/t1-lab/guest.pid -daemonize\n",
+  "syscall_sample": [
+    "123   23:28:38.818910 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_API_VERSION, 0) = 12",
+    "123   23:28:38.819832 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IMMEDIATE_EXIT) = 1",
+    "123   23:28:38.820750 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_NR_MEMSLOTS) = 32764",
+    "123   23:28:38.821669 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MULTI_ADDRESS_SPACE) = 2",
+    "123   23:28:38.822619 ioctl(9</dev/kvm<char 10:232>>, KVM_CREATE_VM, 0) = 10<anon_inode:kvm-vm>",
+    "123   23:28:38.823716 ioctl(10<anon_inode:kvm-vm>, KVM_CHECK_EXTENSION, KVM_CAP_NR_VCPUS) = 32",
+    "123   23:28:38.824706 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MAX_VCPUS) = 4096",
+    "123   23:28:38.825622 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_USER_MEMORY) = 1",
+    "123   23:28:38.826532 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_DESTROY_MEMORY_REGION_WORKS) = 1",
+    "123   23:28:38.827436 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_JOIN_MEMORY_REGIONS_WORKS) = 1",
+    "123   23:28:38.828335 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_SET_TSS_ADDR) = 1",
+    "123   23:28:38.829237 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_EXT_CPUID) = 1",
+    "123   23:28:38.830212 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MP_STATE) = 1",
+    "123   23:28:38.831175 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_COALESCED_MMIO) = 2",
+    "123   23:28:38.832061 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_COALESCED_PIO) = 1",
+    "123   23:28:38.833038 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MANUAL_DIRTY_LOG_PROTECT2) = 3",
+    "123   23:28:38.833969 ioctl(10<anon_inode:kvm-vm>, KVM_ENABLE_CAP, 0x7ffc4f1745c0) = 0",
+    "123   23:28:38.834881 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_VCPU_EVENTS) = 1",
+    "123   23:28:38.835770 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_X86_ROBUST_SINGLESTEP) = 1",
+    "123   23:28:38.836647 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_DEBUGREGS) = 1",
+    "123   23:28:38.837637 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_NESTED_STATE) = 4224",
+    "123   23:28:38.838524 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_SIGNAL_MSI) = 1",
+    "123   23:28:38.839537 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_PCI_2_3) = 0",
+    "123   23:28:38.840416 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQ_INJECT_STATUS) = 1",
+    "123   23:28:38.841308 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_READONLY_MEM) = 1",
+    "123   23:28:38.842231 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IOEVENTFD) = 1",
+    "123   23:28:38.843126 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQFD) = 1",
+    "123   23:28:38.844154 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQFD_RESAMPLE) = 1",
+    "123   23:28:38.845058 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_VM_ATTRIBUTES) = 0",
+    "123   23:28:38.845987 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IOEVENTFD_ANY_LENGTH) = 1",
+    "123   23:28:38.846969 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQ_ROUTING) = 4096",
+    "123   23:28:38.847923 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_XSAVE) = 1",
+    "123   23:28:38.848793 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_XCRS) = 1",
+    "123   23:28:38.849668 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_PIT_STATE2) = 1",
+    "123   23:28:38.850555 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_HYPERV_VP_INDEX) = 1",
+    "123   23:28:38.851439 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_EXCEPTION_PAYLOAD) = 1",
+    "123   23:28:38.852395 ioctl(10<anon_inode:kvm-vm>, KVM_ENABLE_CAP, 0x7ffc4f1743b0) = 0",
+    "123   23:28:38.853290 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSR_INDEX_LIST, 0x7ffc4f1743b0) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.854168 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSR_INDEX_LIST, 0x5861d9da85e0) = 0",
+    "123   23:28:38.855151 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_GET_MSR_FEATURES) = 1",
+    "123   23:28:38.856083 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSR_FEATURE_INDEX_LIST, 0x7ffc4f1743b0) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.856980 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSR_FEATURE_INDEX_LIST, 0x5861d9b01b30) = 0",
+    "123   23:28:38.857971 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_SET_IDENTITY_MAP_ADDR) = 1",
+    "123   23:28:38.858853 ioctl(10<anon_inode:kvm-vm>, KVM_SET_IDENTITY_MAP_ADDR, 0x7ffc4f174330) = 0",
+    "123   23:28:38.859719 ioctl(10<anon_inode:kvm-vm>, KVM_SET_TSS_ADDR, 0xfeffd000) = 0",
+    "123   23:28:38.860734 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_X86_SMM) = 1",
+    "123   23:28:38.861653 ioctl(10<anon_inode:kvm-vm>, KVM_CHECK_EXTENSION, KVM_CAP_X86_SMM) = 1",
+    "123   23:28:38.862590 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQCHIP) = 1",
+    "123   23:28:38.863488 ioctl(10<anon_inode:kvm-vm>, KVM_CREATE_IRQCHIP, 0) = 0",
+    "123   23:28:38.864512 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQ_ROUTING) = 4096",
+    "123   23:28:38.867725 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.868929 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.869933 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.870928 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.871990 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.873014 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.873996 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.874913 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.881855 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.882914 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.884046 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.885087 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.886230 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.887263 ioctl(10<anon_inode:kvm-vm>, KVM_IOEVENTFD, 0x7ffc4f1744f0) = 0",
+    "123   23:28:38.888312 ioctl(10<anon_inode:kvm-vm>, KVM_CHECK_EXTENSION, KVM_CAP_SYNC_MMU) = 1",
+    "123   23:28:38.897813 ioctl(9</dev/kvm<char 10:232>>, KVM_X86_GET_MCE_CAP_SUPPORTED, 0x7ffc4f174420) = 0",
+    "123   23:28:38.898720 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9d9ae70) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.899614 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9b6fad0) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.900482 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9db6560) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.901464 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9db6610) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.902421 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9db6760) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.903310 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, 0x5861d9db69f0) = -1 E2BIG (Argument list too long)",
+    "123   23:28:38.904213 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_SUPPORTED_CPUID, {nent=62, entries=[...]}) = 0",
+    "123   23:28:38.905190 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_TSC_DEADLINE_TIMER) = 1",
+    "123   23:28:38.906161 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x7ffc4f1742a0) = 1",
+    "123   23:28:38.907065 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x7ffc4f1742a0) = 1",
+    "123   23:28:38.907937 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_HYPERV) = 1",
+    "123   23:28:38.908808 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_TSC_DEADLINE_TIMER) = 1",
+    "123   23:28:38.909698 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x7ffc4f174290) = 1",
+    "123   23:28:38.910623 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x7ffc4f174290) = 1",
+    "123   23:28:38.911527 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x7ffc4f1742c0) = 1",
+    "125   23:28:38.915369 ioctl(10<anon_inode:kvm-vm>, KVM_CREATE_VCPU, 0) = 12<anon_inode:kvm-vcpu:0>",
+    "125   23:28:38.916967 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_VCPU_MMAP_SIZE, 0) = 12288",
+    "125   23:28:38.919251 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_GET_TSC_KHZ) = 1",
+    "125   23:28:38.920231 ioctl(12<anon_inode:kvm-vcpu:0>, KVM_GET_TSC_KHZ, 0) = 2495235",
+    "125   23:28:38.921277 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_HYPERV) = 1",
+    "125   23:28:38.922214 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_HYPERV) = 1",
+    "125   23:28:38.923190 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MCE) = 32",
+    "125   23:28:38.924067 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_MCE) = 32",
+    "125   23:28:38.924931 ioctl(9</dev/kvm<char 10:232>>, KVM_X86_GET_MCE_CAP_SUPPORTED, 0x713c2d1fd808) = 0",
+    "125   23:28:38.925878 ioctl(12<anon_inode:kvm-vcpu:0>, KVM_X86_SETUP_MCE, 0x5861d9db6198) = 0",
+    "125   23:28:38.926782 ioctl(12<anon_inode:kvm-vcpu:0>, KVM_SET_CPUID2, {nent=35, entries=[...]}) = 0",
+    "125   23:28:38.927701 ioctl(9</dev/kvm<char 10:232>>, KVM_GET_MSRS, 0x713c2d1fd770) = 1",
+    "125   23:28:38.928591 ioctl(12<anon_inode:kvm-vcpu:0>, KVM_SET_MSRS, 0x713c200030a0) = 2",
+    "123   23:28:38.930065 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQ_ROUTING) = 4096",
+    "123   23:28:38.931336 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_ADJUST_CLOCK) = 14",
+    "123   23:28:38.932316 ioctl(10<anon_inode:kvm-vm>, KVM_GET_CLOCK, 0x7ffc4f1742d0) = 0",
+    "123   23:28:38.933291 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_ADJUST_CLOCK) = 14",
+    "123   23:28:38.934225 ioctl(10<anon_inode:kvm-vm>, KVM_SET_USER_MEMORY_REGION, {slot=0, flags=0, guest_phys_addr=0, memory_size=16777216, userspace_addr=0x713c2d200000}) = 0",
+    "123   23:28:38.948847 ioctl(9</dev/kvm<char 10:232>>, KVM_CHECK_EXTENSION, KVM_CAP_IRQ_ROUTING) = 4096"
+  ]
+};

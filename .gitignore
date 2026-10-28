@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.qcow2
+*.vhdx
+*.vmdk
+*.pem
+id_rsa*
+guest_ed25519*
